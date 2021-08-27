@@ -20,6 +20,18 @@ Route::get('/', function () {
 
 
 Route::get('/hello', function () {
-    Log::info('Accessing hello world page');
+    return view('hello');
+});
+
+Route::get('/error', function () {
+    throw new Exception('Error!');
+});
+
+Route::get('/hello_report', function () {
+    try {
+        throw new Exception('Someone accessed hello world page! Report, but show the view!');
+    } catch (Throwable $e) {
+        report($e);
+    }
     return view('hello');
 });
